@@ -26,12 +26,14 @@ function CreateToDo() {
       const todoItems = `
     <span title="Hit double click and complete" ondblclick="CompletedToDo(this)"> ${todoText.value}
     <span>
+    
     <button type="button" class="edit todo-controls mr-10" onclick="UpdateToDo(this)">Edit</button>
     <button type="button" class="delete todo-controls" onclick="DeleteToDo(this)">Delete</button>
     </div>
     </div>`;
       li.innerHTML = todoItems;
-      todoList.appendChild(li);
+      // todoList.appendChild(li);
+      todoList.insertBefore(li, todoList.firstChild);
 
       if (!todo) todo = [];
 
@@ -39,13 +41,13 @@ function CreateToDo() {
         item: todoText.value,
         status: false,
       };
-      todo.push(itemList);
+      // todo.push(itemList);
+      todo.unshift(itemList);
       setLocalStorage();
+      ReadToDo();
     }
     todoText.value = "";
     setAlertMessage("Todo Item Created Successfully !!");
-    location.reload();
-
   }
 }
 
@@ -64,7 +66,9 @@ function ReadToDo() {
     ${element.item} 
   </div>
   <div>
-        <button class="status todo-controls ${element.status ? "inactive" : "active"}" onclick="ToggleStatus(this)">
+        <button class="status todo-controls ${
+          element.status ? "inactive" : "active"
+        }" onclick="ToggleStatus(this)">
           ${element.status ? "Inactive" : "Active"}
         </button>
     ${
@@ -81,8 +85,8 @@ function ReadToDo() {
 ReadToDo();
 
 function UpdateToDo(e) {
-  const li = e.closest("li"); 
-  const textDiv = li.querySelector("div:first-child"); 
+  const li = e.closest("li");
+  const textDiv = li.querySelector("div:first-child");
 
   if (textDiv.style.textDecoration === "") {
     todoText.value = textDiv.innerText.trim();
@@ -98,14 +102,14 @@ function UpdateOnSelectionItems() {
     setAlertMessage("This item already present in the list!");
     return;
   }
- 
+
   todo.forEach((element) => {
     if (element.item === updateText.innerText.trim()) {
       element.item = todoText.value.trim();
     }
   });
   setLocalStorage();
- 
+
   updateText.innerText = todoText.value.trim();
   addUpdate.innerText = "Add Task";
   addUpdate.onclick = CreateToDo;
@@ -169,9 +173,9 @@ function ToggleStatus(e) {
 
   todo.forEach((element) => {
     if (element.item === taskText) {
-      element.status = !element.status;  
+      element.status = !element.status;
     }
   });
   setLocalStorage();
-  ReadToDo(); 
+  ReadToDo();
 }
