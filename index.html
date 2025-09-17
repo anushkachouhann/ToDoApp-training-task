@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css" />
+    <title>TODO APP</title>
+  </head>
+
+  <body>
+    <div class="container bg-white p-[25px] w-[550px] rounded-xl">
+      <div
+        class="todo-header flex items-center mb-[20px] pl-[5px] justify-center"
+      >
+        <h1 class="flex justify-center items-center text-2xl font-bold mb-10">
+          ToDo List App
+        </h1>
+      </div>
+
+      <div
+        class="todo-content flex items-center justify-between border rounded-3xl bg-gray-200 pl-[20px] m-[5px] mb-[20px]"
+      >
+        <input
+          type="text"
+          id="todo-text"
+          placeholder="Add your Task"
+          class="todo-input flex-1 bg-tansparent p-4 text-[14px] outline-none"
+        />
+        <button
+          id="addUpdateClick"
+          class="border border-blue-200 p-2 rounded-3xl bg-blue-200 py-2"
+          onclick="CreateToDo();"
+        >
+          Add Task</button
+        ><br />
+      </div>
+      <h5 id="alert" class="text-center mb-[10px] text-green-500"></h5>
+      <ul id="todo-list" class="todo-list"></ul>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
